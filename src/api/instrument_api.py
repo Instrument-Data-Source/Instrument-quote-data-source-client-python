@@ -319,12 +319,12 @@ class InstrumentApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.post_instrument_with_http_info(**kwargs)  # noqa: E501
+            return self.api_instrument_post_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.post_instrument_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.api_instrument_post_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def post_instrument_with_http_info(self, **kwargs):  # noqa: E501
+    def api_instrument_post_with_http_info(self, **kwargs):  # noqa: E501
         """api_instrument_post  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
