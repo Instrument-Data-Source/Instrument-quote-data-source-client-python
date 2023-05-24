@@ -28,3 +28,4 @@ from .models.new_candles_dto import NewCandlesDto
 from .models.new_instrument_request_dto import NewInstrumentRequestDto
 from .models.period_response_dto import PeriodResponseDto
 from .models.time_frame_response_dto import TimeFrameResponseDto
+from .client import *
