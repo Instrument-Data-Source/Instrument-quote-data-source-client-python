@@ -128,7 +128,7 @@ class TimeFrameApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def api_time_frame_get(self, **kwargs) -> List[TimeFrameResponseDto]:  # noqa: E501
+    def get_all_time_frame(self, **kwargs) -> List[TimeFrameResponseDto]:  # noqa: E501
         """api_time_frame_get  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
@@ -143,12 +143,12 @@ class TimeFrameApi(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.api_time_frame_get_with_http_info(**kwargs)  # noqa: E501
+            return self.get_time_frame_with_http_info(**kwargs)  # noqa: E501
         else:
-            (data) = self.api_time_frame_get_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.get_time_frame_with_http_info(**kwargs)  # noqa: E501
             return data
 
-    def api_time_frame_get_with_http_info(self, **kwargs):  # noqa: E501
+    def get_time_frame_with_http_info(self, **kwargs):  # noqa: E501
         """api_time_frame_get  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an

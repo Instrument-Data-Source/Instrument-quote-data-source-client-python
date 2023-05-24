@@ -17,7 +17,7 @@ class TimeFrameApi_GetAll_TestCase(unittest.TestCase):
     api_instance = src.TimeFrameApi(src.ApiClient(configuration))
 
     # Act
-    asserted_response = api_instance.api_time_frame_get()
+    asserted_response = api_instance.get_all_time_frame()
 
     # Assert
     asserted_tf_code = [resp.code for resp in asserted_response]
