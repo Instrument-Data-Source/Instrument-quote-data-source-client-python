@@ -2,6 +2,7 @@
 Client to connect to service Instrument-quote-data-source-srv
 
 ## Funtions
+All unrealized functions shows in [ecnchancement issue list](https://github.com/Instrument-Data-Source/Instrument-quote-data-source-client-python/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
 ### Instruments
 - ~~Get list of instruments~~
 - ~~Get list of loaded periods~~
