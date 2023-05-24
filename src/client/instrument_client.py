@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Union
 from ..configuration import Configuration
 from .. import InstrumentApi, ApiClient, NewInstrumentRequestDto, InstrumentResponseDto
 
@@ -13,3 +13,6 @@ class InstrumentClient:
 
     def get_all(self) -> List[InstrumentResponseDto]:
         return self.__api_instance.api_instrument_get()
+
+    def get_by(self, instumentStr: Union[str, int]) -> InstrumentResponseDto:
+        return self.__api_instance.api_instrument_instrument_str_get(instumentStr)
