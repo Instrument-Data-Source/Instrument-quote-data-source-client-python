@@ -1,22 +1,23 @@
 import unittest
 import logging
-from src.configuration import Configuration
-from src.api import TimeFrameApi
+import src
 
 
-class Configuration_TestCase(unittest.TestCase):
+class TimeFrameClient_GetAll_TestCase(unittest.TestCase):
 
   logger = logging.getLogger(__name__)
   logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
                       datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
-  def test_WHEN_set_up_default_host_THEN_when_no_config_than_of(self):
+  def test_WHEN_request_tf_list_THEN_get_it(self):
     # Array
-    Configuration.DEFAULT_HOST = "srv"
+    configuration = src.Configuration()
+    configuration.host = "srv"
+
+    api_instance = src.TimeFrameClient(configuration)
 
     # Act
-    api_instance = TimeFrameApi()
-    asserted_response = api_instance.api_time_frame_get()
+    asserted_response = api_instance.get_all()
 
     # Assert
     asserted_tf_code = [resp.code for resp in asserted_response]

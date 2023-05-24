@@ -303,7 +303,7 @@ class InstrumentApi(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def post_instrument(self, **kwargs) -> InstrumentResponseDto:  # noqa: E501
+    def api_instrument_post(self, **kwargs) -> InstrumentResponseDto:  # noqa: E501
         """api_instrument_post  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
