@@ -10,7 +10,7 @@ All unrealized functions shows in [enhancement issue list](https://github.com/In
 - ~~Add new instrument~~
 
 ### TimeFrames
-- ~~Get list of timeframes~~
+- Get list of timeframes
 
 ### Candle data
 - ~~Get Candles of Instrument in Period~~
