@@ -9,6 +9,7 @@ All unrealized functions shows in [enhancement issue list](https://github.com/In
 - ~~Get instrument~~
 - ~~Get list of loaded periods~~
 - Add new instrument
+- Delete instruments
 
 ### TimeFrames
 - Get list of timeframes
