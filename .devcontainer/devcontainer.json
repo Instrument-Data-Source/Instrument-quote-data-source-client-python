@@ -48,7 +48,8 @@
 	"extensions": [
 		"ms-python.python",
 		"ms-python.vscode-pylance",
-		"njpwerner.autodocstring"
+		"njpwerner.autodocstring",
+		"mhutchie.git-graph"
 	],
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
