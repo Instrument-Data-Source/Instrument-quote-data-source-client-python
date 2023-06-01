@@ -16,3 +16,6 @@ class InstrumentClient:
 
     def get_by(self, instumentStr: Union[str, int]) -> InstrumentResponseDto:
         return self.__api_instance.api_instrument_instrument_str_get(instumentStr)
+
+    def delete_by(self, instumentStr: Union[str, int]):
+        self.__api_instance.api_instrument_instrument_str_delete(instumentStr)

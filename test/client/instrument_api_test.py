@@ -72,3 +72,46 @@ class InstrumentApi_get_all_instrument_TestCase(unittest.TestCase):
     # Assert
     self.assertIsInstance(asserted_dto, InstrumentResponseDto)
     self.assertEqual(asserted_dto, new_inst)
+
+
+import unittest
+import logging
+
+class InstrumentApi_delete_TestCase(unittest.TestCase):
+
+  logger = logging.getLogger(__name__)
+  logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
+                      datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
+
+  def __init__(self, methodName: str = "runTest") -> None:
+    Configuration.DEFAULT_HOST = "srv"
+
+    super().__init__(methodName)
+
+  def test_WHEN_create_instrument_and_delete_by_id_THEN_deleted(self):
+    # Array
+    client = InstrumentClient()
+    request_dto = NewInstrumentRequestDto(
+        f"InstrumentInstDel16", f"InstDel1", 1, price_decimal_len=4, volume_decimal_len=2)
+    new_inst = client.post_instrument(request_dto)
+
+    # Act
+    client.delete_by(new_inst.id)
+
+    # Assert
+    asserted_value= client.get_by(new_inst.id)
+    self.assertIsNone(asserted_value)
+
+  def test_WHEN_create_instrument_and_delete_by_code_THEN_deleted(self):
+    # Array
+    client = InstrumentClient()
+    request_dto = NewInstrumentRequestDto(
+        f"InstrumentInstDel16", f"InstDel2", 1, price_decimal_len=4, volume_decimal_len=2)
+    new_inst = client.post_instrument(request_dto)
+
+    # Act
+    client.delete_by("InstDel2")
+
+    # Assert
+    asserted_value= client.get_by(new_inst.id)
+    self.assertIsNone(asserted_value)
