@@ -1,7 +1,7 @@
 import unittest
 import logging
-from src.configuration import Configuration
-from src.api import TimeFrameApi
+from src.default_config import get_default_config, set_default_host
+
 
 
 class Configuration_TestCase(unittest.TestCase):
@@ -12,17 +12,12 @@ class Configuration_TestCase(unittest.TestCase):
 
   def test_WHEN_set_up_default_host_THEN_when_no_config_than_of(self):
     # Array
-    Configuration.DEFAULT_HOST = "srv"
+    expectedHost = "123"
 
     # Act
-    api_instance = TimeFrameApi()
-    asserted_response = api_instance.api_time_frame_get()
+    set_default_host(expectedHost)
+    assertedConfig = get_default_config()
 
     # Assert
-    asserted_tf_code = [resp.code for resp in asserted_response]
-    self.logger.info("Asserted response")
-    self.logger.info(asserted_response)
-
-    self.assertGreater(len(asserted_response), 0)
-    self.assertIn("M", asserted_tf_code)
-    self.assertIn("m1", asserted_tf_code)
+    self.assertEqual(expectedHost, assertedConfig.host,
+                     "Default config doesn't changed")

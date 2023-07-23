@@ -1,0 +1,38 @@
+name: Project Unit tests
+
+on:
+  pull_request:
+    branches: [ master ]
+    
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/devcontainers/python:0-3.11
+
+    services:
+      db:
+        image: postgres:14.3
+        #volumes:
+        #  - postgres-data:/var/lib/postgresql/data
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+      srv:
+        image: ghcr.io/instrument-data-source/instrument-quote-data-source-srv:latest
+        ports:
+          - 80:80
+        env: 
+          ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=postgres;Username=postgres;Password=postgres"
+
+      
+
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: install dependency
+        run: |
+          pip install --upgrade pip
+          pip3 install --user -r requirements.txt
+      - name: Run tests
+        run: python -m unittest discover -v -s ./test -p *_test.py
