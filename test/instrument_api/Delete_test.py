@@ -1,4 +1,4 @@
-from src.client.instrument_client import InstrumentClient,NewInstrumentRequestDto
+from src.instrument_client import InstrumentClient,NewInstrumentRequestDto
 import logging
 import unittest
 

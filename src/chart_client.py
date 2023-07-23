@@ -1,9 +1,9 @@
 from typing import List, Union
-from ..swagger_client.rest import ApiException
-from ..swagger_client.configuration import Configuration
-from ..swagger_client import ChartApi, ApiClient, UploadedCandlesDto, CandleDto, ChartDto
-from ..default_config import get_default_config
-from ..tools.date_mapper import map_to_dto_dt, map_to_variable
+from .swagger_client.rest import ApiException
+from .swagger_client.configuration import Configuration
+from .swagger_client import ChartApi, ApiClient, UploadedCandlesDto, CandleDto, ChartDto
+from .default_config import get_default_config
+from .tools.date_mapper import map_to_dto_dt, map_to_variable
 
 
 class ChartClient:

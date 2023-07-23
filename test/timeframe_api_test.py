@@ -1,11 +1,10 @@
 import unittest
 import logging
 from src.default_config import set_default_host
-from src.client import InstrumentTypeClient, InstrumentTypeResponseDto
+from src import TimeFrameClient, TimeFrameResponseDto
 
 
-
-class InstrumentTypeClient_GetAll_TestCase(unittest.TestCase):
+class TimeFrameClient_GetAll_TestCase(unittest.TestCase):
 
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
@@ -15,22 +14,22 @@ class InstrumentTypeClient_GetAll_TestCase(unittest.TestCase):
         # Array
         set_default_host("srv")
 
-        api_instance = InstrumentTypeClient()
+        api_instance = TimeFrameClient()
 
         # Act
         asserted_response = api_instance.get_all()
 
         # Assert
-        asserted_tf_code = [resp.name for resp in asserted_response]
+        asserted_tf_code = [resp.code for resp in asserted_response]
         self.logger.info("Asserted response")
         self.logger.info(asserted_response)
 
         self.assertGreater(len(asserted_response), 0)
-        self.assertIn("Stock", asserted_tf_code)
-        self.assertIn("Currency", asserted_tf_code)
+        self.assertIn("M", asserted_tf_code)
+        self.assertIn("m1", asserted_tf_code)
 
 
-class InstrumentTypeClient_GetByCode_TestCase(unittest.TestCase):
+class TimeFrameClient_GetByCode_TestCase(unittest.TestCase):
 
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
@@ -40,23 +39,24 @@ class InstrumentTypeClient_GetByCode_TestCase(unittest.TestCase):
         # Array
         set_default_host("srv")
 
-        api_instance = InstrumentTypeClient()
+        api_instance = TimeFrameClient()
 
         # Act
-        asserted_response = api_instance.get("Stock")
+        asserted_response = api_instance.get("m1")
 
         # Assert
         self.logger.info("Asserted response")
         self.logger.info(asserted_response)
 
-        self.assertEqual("Stock", asserted_response.name)
-        self.assertEqual(2, asserted_response.id)
+        self.assertEqual("m1", asserted_response.code)
+        self.assertEqual(10, asserted_response.id)
+        self.assertEqual(60, asserted_response.seconds)
 
     def test_WHEN_request_with_incorrect_code_THEN_get_it(self):
         # Array
         set_default_host("srv")
 
-        api_instance = InstrumentTypeClient()
+        api_instance = TimeFrameClient()
 
         # Act
 
@@ -64,7 +64,7 @@ class InstrumentTypeClient_GetByCode_TestCase(unittest.TestCase):
         self.assertIsNone(api_instance.get("m111"))
 
 
-class InstrumentTypeClient_GetById_TestCase(unittest.TestCase):
+class TimeFrameClient_GetById_TestCase(unittest.TestCase):
 
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
@@ -74,26 +74,26 @@ class InstrumentTypeClient_GetById_TestCase(unittest.TestCase):
         # Array
         set_default_host("srv")
 
-        api_instance = InstrumentTypeClient()
+        api_instance = TimeFrameClient()
 
         # Act
-        asserted_response = api_instance.get(2)
+        asserted_response = api_instance.get(10)
 
         # Assert
         self.logger.info("Asserted response")
         self.logger.info(asserted_response)
 
-        self.assertEqual("Stock", asserted_response.name)
-        self.assertEqual(2, asserted_response.id)
+        self.assertEqual("m1", asserted_response.code)
+        self.assertEqual(10, asserted_response.id)
+        self.assertEqual(60, asserted_response.seconds)
 
     def test_WHEN_request_with_incorrect_id_THEN_get_it(self):
         # Array
         set_default_host("srv")
 
-        api_instance = InstrumentTypeClient()
+        api_instance = TimeFrameClient()
 
         # Act
-        self.assertIsNone(api_instance.get(-1))
 
         # Assert
         self.assertIsNone(api_instance.get(-1))

@@ -1,8 +1,8 @@
-from ..swagger_client.configuration import Configuration
-from ..swagger_client import InstrumentTypeApi, ApiClient,  InstrumentTypeResponseDto
-from ..swagger_client.rest import ApiException
+from .swagger_client.configuration import Configuration
+from .swagger_client import InstrumentTypeApi, ApiClient,  InstrumentTypeResponseDto
+from .swagger_client.rest import ApiException
 from typing import List
-from ..default_config import get_default_config
+from .default_config import get_default_config
 
 
 class InstrumentTypeClient:
