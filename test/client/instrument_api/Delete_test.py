@@ -1,5 +1,4 @@
-from src.swagger_client import Configuration, NewInstrumentRequestDto
-from src.client.instrument_client import InstrumentClient
+from src.client.instrument_client import InstrumentClient,NewInstrumentRequestDto
 import logging
 import unittest
 

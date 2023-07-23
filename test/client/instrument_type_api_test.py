@@ -1,8 +1,8 @@
 import unittest
 import logging
 from src.default_config import set_default_host
-from src.client import InstrumentTypeClient
-from src.swagger_client.rest import ApiException
+from src.client import InstrumentTypeClient, InstrumentTypeResponseDto
+
 
 
 class InstrumentTypeClient_GetAll_TestCase(unittest.TestCase):

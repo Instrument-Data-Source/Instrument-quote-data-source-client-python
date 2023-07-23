@@ -1,6 +1,5 @@
-from src.swagger_client import Configuration, NewInstrumentRequestDto
-from src.swagger_client.models.instrument_response_dto import InstrumentResponseDto
-from src.client.instrument_client import InstrumentClient
+
+from src.client.instrument_client import InstrumentClient, NewInstrumentRequestDto, InstrumentResponseDto
 import logging
 import unittest
 from src.default_config import set_default_host
