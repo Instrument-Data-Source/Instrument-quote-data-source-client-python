@@ -1,5 +1,7 @@
-from src import Configuration, InstrumentClient, NewInstrumentRequestDto
-from src.models.instrument_response_dto import InstrumentResponseDto
+from src.swagger_client import Configuration, NewInstrumentRequestDto
+from src.swagger_client.models.instrument_response_dto import InstrumentResponseDto
+from src.default_config import set_default_host
+from src.client import InstrumentClient
 import logging
 import unittest
 
@@ -12,7 +14,7 @@ class Post_instrument_TestCase(unittest.TestCase):
 
     def test_WHEN_request_create_THEN_ok(self):
         # Array
-        Configuration.DEFAULT_HOST = "srv"
+        set_default_host("srv")
         client = InstrumentClient()
         request_dto = NewInstrumentRequestDto(
             f"Instrument10", f"InstPost10", 1, price_decimal_len=4, volume_decimal_len=2)
@@ -22,6 +24,8 @@ class Post_instrument_TestCase(unittest.TestCase):
         # Assert
         self.logger.info(asserted_response)
         self.assertIsInstance(asserted_response, InstrumentResponseDto)
+        self.assertEqual(asserted_response.code, request_dto.code)
+        self.assertEqual(asserted_response.name, request_dto.name)
 
         # tearDown
         client.delete_by(asserted_response.id)
