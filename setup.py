@@ -1,10 +1,9 @@
-# coding: utf-8
 import pkg_resources
 import setuptools
 import os
 from pathlib import Path
 
-VERSION = "1.2.0"
+VERSION = "2.0.0"
 
 file_path = os.path.join(Path('.'), "requirements.txt")
 with open(file_path) as requirements_txt:
