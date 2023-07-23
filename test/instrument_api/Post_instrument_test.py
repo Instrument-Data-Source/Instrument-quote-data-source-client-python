@@ -1,5 +1,5 @@
 from src.default_config import set_default_host
-from src.client import InstrumentClient,NewInstrumentRequestDto ,InstrumentResponseDto
+from src import InstrumentClient,NewInstrumentRequestDto ,InstrumentResponseDto
 import logging
 import unittest
 

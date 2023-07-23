@@ -1,8 +1,8 @@
 from typing import List, Union
-from ..swagger_client.rest import ApiException
-from ..swagger_client.configuration import Configuration
-from ..swagger_client import InstrumentApi, ApiClient, NewInstrumentRequestDto, InstrumentResponseDto
-from ..default_config import get_default_config
+from .swagger_client.rest import ApiException
+from .swagger_client.configuration import Configuration
+from .swagger_client import InstrumentApi, ApiClient, NewInstrumentRequestDto, InstrumentResponseDto
+from .default_config import get_default_config
 
 
 class InstrumentClient:

@@ -1,4 +1,4 @@
-from src.client import ChartClient, InstrumentClient, UploadedCandlesDto, CandleDto, ChartClient, QuoteClient,NewInstrumentRequestDto
+from src import ChartClient, InstrumentClient, UploadedCandlesDto, CandleDto, ChartClient, QuoteClient,NewInstrumentRequestDto
 import logging
 import unittest
 from src.default_config import set_default_host
