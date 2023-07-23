@@ -15,22 +15,19 @@ jobs:
       srv:
         image: ghcr.io/instrument-data-source/instrument-quote-data-source-srv:latest
         ports:
-          - 30101:80
-        links:
-          - db
-        depends_on:
-          - db
+          - 80:80
+        env: 
+          ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=postgres;Username=postgres;Password=postgres"
 
       db:
         image: postgres:14.3
-        restart: unless-stopped
         #volumes:
         #  - postgres-data:/var/lib/postgresql/data
-        environment:
+        env:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
           POSTGRES_DB: postgres
-          
+
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
