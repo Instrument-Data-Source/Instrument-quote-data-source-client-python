@@ -3,9 +3,7 @@ name: Project Unit tests
 on:
   pull_request:
     branches: [ master ]
-  push:
-    branches: [ 18-create-wf ]
-
+    
 jobs:
   testing:
     runs-on: ubuntu-latest
