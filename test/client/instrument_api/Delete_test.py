@@ -1,9 +1,9 @@
-from src import Configuration, InstrumentClient, NewInstrumentRequestDto
+from src.client.instrument_client import InstrumentClient,NewInstrumentRequestDto
 import logging
 import unittest
 
-from src.rest import ApiException
-
+from src.swagger_client.rest import ApiException
+from src.default_config import set_default_host
 
 class Delete_TestCase(unittest.TestCase):
 
@@ -12,48 +12,41 @@ class Delete_TestCase(unittest.TestCase):
                       datefmt='%m/%d/%Y %I:%M:%S %p', level=logging.INFO)
 
   def __init__(self, methodName: str = "runTest") -> None:
-    Configuration.DEFAULT_HOST = "srv"
+    set_default_host("srv")
     self.client = InstrumentClient()
+    self.using_dto1 = NewInstrumentRequestDto(
+        f"Instrument13", f"InstGA1", 1, price_decimal_len=4, volume_decimal_len=2)
+    self.using_dto2 = NewInstrumentRequestDto(
+        f"Instrument14", f"InstGA2", 2, price_decimal_len=5, volume_decimal_len=3)
+
     super().__init__(methodName)
+
+  def setUp(self):
+    for dto in self.client.get_all():
+      self.client.delete_by(dto.id)
+    self.expected_dto1 = self.client.post_instrument(self.using_dto1)
+    self.expected_dto2 = self.client.post_instrument(self.using_dto2)
+
+  def tearDown(self):
+    for dto in self.client.get_all():
+      self.client.delete_by(dto.id)
 
   def test_WHEN_create_instrument_and_delete_by_id_THEN_deleted(self):
     # Array
-    request_dto = NewInstrumentRequestDto(
-        f"InstrumentInstDel16", f"InstDel1", 1, price_decimal_len=4, volume_decimal_len=2)
-    new_inst = self.client.post_instrument(request_dto)
 
     # Act
-    self.client.delete_by(new_inst.id)
+    self.client.delete_by(self.expected_dto1.id)
 
     # Assert
-    asserted_value = self.client.get_by(new_inst.id)
-    self.assertIsNone(asserted_value)
+    self.assertIsNone(self.client.get_by(self.expected_dto1.id))
 
   def test_WHEN_create_instrument_and_delete_by_code_THEN_deleted(self):
     # Array
-    request_dto = NewInstrumentRequestDto(
-        f"InstrumentInstDel16", f"InstDel2", 1, price_decimal_len=4, volume_decimal_len=2)
-    new_inst = self.client.post_instrument(request_dto)
-
     # Act
-    self.client.delete_by("InstDel2")
+    self.client.delete_by(self.expected_dto1.code)
 
     # Assert
-    asserted_value = self.client.get_by(new_inst.id)
-    self.assertIsNone(asserted_value)
-
-  def test_WHEN_create_instrument_and_delete_by_code_THEN_deleted(self):
-    # Array
-    request_dto = NewInstrumentRequestDto(
-        f"InstrumentInstDel16", f"InstDel2", 1, price_decimal_len=4, volume_decimal_len=2)
-    new_inst = self.client.post_instrument(request_dto)
-
-    # Act
-    self.client.delete_by("InstDel2")
-
-    # Assert
-    asserted_value = self.client.get_by(new_inst.id)
-    self.assertIsNone(asserted_value)
+    self.assertIsNone(self.client.get_by(self.expected_dto1.id))
 
   def test_WHEN_try_delete_wrong_instrumnt_THEN_exception(self):
       # Array

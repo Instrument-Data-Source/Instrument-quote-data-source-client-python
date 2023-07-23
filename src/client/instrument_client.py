@@ -1,12 +1,14 @@
 from typing import List, Union
-
-from ..rest import ApiException
-from ..configuration import Configuration
-from .. import InstrumentApi, ApiClient, NewInstrumentRequestDto, InstrumentResponseDto
+from ..swagger_client.rest import ApiException
+from ..swagger_client.configuration import Configuration
+from ..swagger_client import InstrumentApi, ApiClient, NewInstrumentRequestDto, InstrumentResponseDto
+from ..default_config import get_default_config
 
 
 class InstrumentClient:
     def __init__(self, configuration: Configuration = None) -> None:
+        if configuration is None:
+            configuration = get_default_config()
         self.__api_instance = InstrumentApi(ApiClient(configuration))
         pass
 
