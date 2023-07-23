@@ -1,0 +1,38 @@
+name: Project Unit tests
+
+on:
+  pull_request:
+    branches: [ master ]
+  push:
+    branches: [ 18-create-wf ]
+
+jobs:
+  testing:
+    runs-on: ubuntu-latest
+    container: mcr.microsoft.com/dotnet/sdk:7.0
+
+    services:
+      srv:
+        image: ghcr.io/instrument-data-source/instrument-quote-data-source-srv:latest
+        ports:
+          - 30101:80
+        links:
+          - db
+        depends_on:
+          - db
+
+      db:
+        image: postgres:14.3
+        restart: unless-stopped
+        #volumes:
+        #  - postgres-data:/var/lib/postgresql/data
+        environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+          POSTGRES_DB: postgres
+          
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Run tests
+        run: python -m unittest discover -v -s ./test -p *_test.py
