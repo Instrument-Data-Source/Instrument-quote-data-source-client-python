@@ -35,6 +35,7 @@ jobs:
     container: mcr.microsoft.com/devcontainers/python:0-3.11
     needs: check_changing
     if: ${{ needs.check_changing.outputs.code_changed == 'true' || needs.check_changing.outputs.test_changed == 'true' }}
+    
     services:
       db:
         image: postgres:14.3
