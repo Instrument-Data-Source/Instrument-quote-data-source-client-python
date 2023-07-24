@@ -1,5 +1,4 @@
-from typing import List, Union
-from .swagger_client.rest import ApiException
+from typing import List
 from .swagger_client.configuration import Configuration
 from .swagger_client import ChartApi, ApiClient, UploadedCandlesDto, CandleDto, ChartDto
 from .default_config import get_default_config
