@@ -5,3 +5,4 @@ from .instrument_type_client import InstrumentTypeClient, InstrumentTypeResponse
 from .chart_client import ChartClient, UploadedCandlesDto
 from .swagger_client.models import CandleDto
 from .quote_client import QuoteClient
+from .default_config import set_default_host
