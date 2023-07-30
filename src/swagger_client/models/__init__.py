@@ -14,12 +14,13 @@
 from __future__ import absolute_import
 
 # import models into model package
-from ...swagger_client.models.bad_request_dto import BadRequestDto
-from ...swagger_client.models.candle_dto import CandleDto
-from ...swagger_client.models.chart_dto import ChartDto
-from ...swagger_client.models.error_dto import ErrorDto
-from ...swagger_client.models.instrument_response_dto import InstrumentResponseDto
-from ...swagger_client.models.instrument_type_response_dto import InstrumentTypeResponseDto
-from ...swagger_client.models.new_instrument_request_dto import NewInstrumentRequestDto
-from ...swagger_client.models.time_frame_response_dto import TimeFrameResponseDto
-from ...swagger_client.models.uploaded_candles_dto import UploadedCandlesDto
+from ..models.bad_request_dto import BadRequestDto
+from ..models.candle_dto import CandleDto
+from ..models.chart_dto import ChartDto
+from ..models.error_dto import ErrorDto
+from ..models.instrument_response_dto import InstrumentResponseDto
+from ..models.instrument_type_response_dto import InstrumentTypeResponseDto
+from ..models.joined_candle_dto import JoinedCandleDto
+from ..models.new_instrument_request_dto import NewInstrumentRequestDto
+from ..models.time_frame_response_dto import TimeFrameResponseDto
+from ..models.uploaded_candles_dto import UploadedCandlesDto

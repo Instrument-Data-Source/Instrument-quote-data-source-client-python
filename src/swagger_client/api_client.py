@@ -22,9 +22,8 @@ import tempfile
 import six
 from six.moves.urllib.parse import quote
 
-from ..swagger_client.configuration import Configuration
-from . import models
-from . import rest
+from .configuration import Configuration
+from . import models, rest
 
 
 class ApiClient(object):
