@@ -1,12 +1,18 @@
-from src import ChartClient, InstrumentClient, UploadedCandlesDto, CandleDto, ChartClient, QuoteClient, NewInstrumentRequestDto
-import logging
+from datetime import datetime, date, timezone
 import unittest
+import logging
+from src.chart_client import ChartClient
+
 from src.default_config import set_default_host
-from datetime import datetime, timezone, date
+from src.instrument_client import InstrumentClient
+from src.quote_client import QuoteClient
+from src.swagger_client.models.candle_dto import CandleDto
+from src.swagger_client.models.new_instrument_request_dto import NewInstrumentRequestDto
+from src.swagger_client.models.uploaded_candles_dto import UploadedCandlesDto
 from src.tools.date_mapper import set_utc_check
 
 
-class Get_Quote_TestCase(unittest.TestCase):
+class Get_Joined_Quotes_TestCase(unittest.TestCase):
 
     logger = logging.getLogger(__name__)
     logging.basicConfig(format='%(asctime)s %(module)s %(levelname)s: %(message)s',
@@ -32,8 +38,8 @@ class Get_Quote_TestCase(unittest.TestCase):
             self.using_inst2)
 
         self.usedCandles = [
-            CandleDto(datetime(2020, 1, 1), 100, 150, 90, 130, 100),
-            CandleDto(datetime(2020, 1, 2), 110.1, 160, 80, 140, 110.33),]
+            CandleDto(datetime(2020, 1, 1), 100, 160, 90, 130, 100),
+            CandleDto(datetime(2020, 1, 2), 110.1, 150, 80, 140, 110.33),]
         self.usedDto = UploadedCandlesDto(
             datetime(2020, 1, 1), datetime(2020, 2, 1), self.usedCandles)
         set_utc_check(False)
@@ -44,31 +50,34 @@ class Get_Quote_TestCase(unittest.TestCase):
         for dto in self.instrument_client.get_all():
             self.instrument_client.delete_by(dto.id)
 
-    def test_WHEN_request_quotes_THEN_get_correct(self):
+    def test_WHEN_request_joinedChart_THEN_get_correct_response(self):
         # Array
 
         # Act
-        assertedResponse = self.client.get_for(
-            self.expected_inst1.code, "D1", date(2020, 1, 1), date(2020, 2, 1))
+        assertedResponse = self.client.get_joined_for(
+            self.expected_inst1.code, "D1", "M", date(2020, 1, 1), date(2020, 2, 1))
 
         # Assert
-
         self.assertEqual(2, len(assertedResponse))
 
         assertedCandle = assertedResponse[0]
         self.assertEqual(datetime(2020, 1, 1).astimezone(
             timezone.utc), assertedCandle.date_time)
         self.assertEqual(100, assertedCandle.open)
-        self.assertEqual(150, assertedCandle.high)
+        self.assertEqual(160, assertedCandle.high)
         self.assertEqual(90, assertedCandle.low)
         self.assertEqual(130, assertedCandle.close)
         self.assertEqual(100, assertedCandle.volume)
+        self.assertFalse(assertedCandle.is_last)
+        self.assertTrue(assertedCandle.is_full_calced)
 
         assertedCandle = assertedResponse[1]
         self.assertEqual(datetime(2020, 1, 2).astimezone(
             timezone.utc), assertedCandle.date_time)
-        self.assertEqual(110.1, assertedCandle.open)
+        self.assertEqual(100, assertedCandle.open)
         self.assertEqual(160, assertedCandle.high)
         self.assertEqual(80, assertedCandle.low)
         self.assertEqual(140, assertedCandle.close)
-        self.assertEqual(110.33, assertedCandle.volume)
+        self.assertEqual(210.33, assertedCandle.volume)
+        self.assertTrue(assertedCandle.is_last)
+        self.assertTrue(assertedCandle.is_full_calced)

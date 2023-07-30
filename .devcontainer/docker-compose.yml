@@ -13,7 +13,7 @@ services:
     command: sleep infinity
 
   srv:
-    image: ghcr.io/instrument-data-source/instrument-quote-data-source-srv:v2.0.2
+    image: ghcr.io/instrument-data-source/instrument-quote-data-source-srv:latest
     restart: unless-stopped
     ports:
       - 30101:80

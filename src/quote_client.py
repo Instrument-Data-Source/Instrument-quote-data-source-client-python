@@ -1,7 +1,7 @@
 from typing import List, Union
 from .swagger_client.rest import ApiException
 from .swagger_client.configuration import Configuration
-from .swagger_client import ChartApi, ApiClient, CandleDto
+from .swagger_client import ChartApi, ApiClient, CandleDto, JoinedCandleDto
 from .default_config import get_default_config
 from .tools.date_mapper import map_to_dto_dt, map_to_variable
 from datetime import date
@@ -19,6 +19,15 @@ class QuoteClient:
             instrumentIdOrCode, timeframeIdOrCode,
             _from=map_to_dto_dt(from_date), untill=map_to_dto_dt(untill_date))
         ret = [CandleDto(**r.to_dict()) for r in response]
+        for row in ret:
+            row.date_time = map_to_variable(row.date_time)
+        return ret
+
+    def get_joined_for(self, instrumentIdOrCode: str, timeframeIdOrCode: str, targetTimeFrameIdOrCode: str, from_date: date, untill_date: date) -> List[JoinedCandleDto]:
+        response: List[JoinedCandleDto] = self.__api_instance.api_chart_instrument_str_timeframe_str_target_time_frame_get(
+            instrumentIdOrCode, timeframeIdOrCode, targetTimeFrameIdOrCode,
+            _from=map_to_dto_dt(from_date), untill=map_to_dto_dt(untill_date))
+        ret = [JoinedCandleDto(**r.to_dict()) for r in response]
         for row in ret:
             row.date_time = map_to_variable(row.date_time)
         return ret
