@@ -29,6 +29,7 @@ from .models.chart_dto import ChartDto
 from .models.error_dto import ErrorDto
 from .models.instrument_response_dto import InstrumentResponseDto
 from .models.instrument_type_response_dto import InstrumentTypeResponseDto
+from .models.joined_candle_dto import JoinedCandleDto
 from .models.new_instrument_request_dto import NewInstrumentRequestDto
 from .models.time_frame_response_dto import TimeFrameResponseDto
 from .models.uploaded_candles_dto import UploadedCandlesDto
